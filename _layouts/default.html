@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
+    <script src="https://kit.fontawesome.com/46e3c2907d.js" crossorigin="anonymous"></script>
     {% seo %}
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
@@ -29,17 +29,31 @@
       <section>
         <!-- nighthawk coding society has altered arrangement and inserted navigation that is updated in independent file -->
         <div id="title">
-          <h1><a href={{ site.gitorg }}>{{ site.title | default: site.github.repository_name }}</a></h1>
-          <p>{{ site.description | default: site.github.project_tagline }}</p>
+          <h1><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Not Cookie Clicker</a></h1>
+          <p>Javascript Demo Assignment</p>
           <hr>
           {% include home.html %}
         </div>
-
         <!-- this is Jekyll magic, each md file in site will be inserted here -->
         {{ content }}
-
       </section>
-
     </div>
+    <script>
+      window.onload = function() {
+        let logstat = localStorage.getItem("logged_in");
+        let username = localStorage.getItem("username")
+        let nav = document.getElementById("navbar")
+        console.log(logstat)
+        console.log(username)
+        if (logstat == "true") {
+          nav.style.display = "table";
+        }
+        else {
+          nav.style.display = "none"
+        }
+      }
+      </script>
   </body>
 </html>
+
+
