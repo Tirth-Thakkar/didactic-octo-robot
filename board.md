@@ -1,52 +1,110 @@
-## Housing Overview
-> Sleeps 48 people. Verify your housing assignment at the reunion with Jeremiah and Melissa in case there are last minute changes.
- 
-> Preview [Homes](https://www.coramranch.com/vacation-home)
-- River House
-- Dogwood House
-- Alpine and Birch House
-- Cedar House
-- Rec Room
 
-## Cooking
-> On site there are cooking facilities in each house. The Alpine ranch kitchens will be for large group meals and has appliances and utensils. There is an outdoor barbecue!
+<head>
+    <title>Leaderboard</title>
+</head>
+<body>
+    <div>
+        <form id="searchForm">
+            <input type="text" id="usernameInput" placeholder="Enter username">
+            <button type="submit">Search</button>
+            <button type="button" id="returnButton" style="display: none;">Return</button>
+        </form>
+    </div>
+
+    <div>
+        <table id="leaderboard">
+            <tr>
+                <th>User</th>
+                <th>Score</th>
+            </tr>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Update the leaderboard every 5 seconds
+        setInterval(updateLeaderboard, 15000);
+
+        // Retrieve the leaderboard data and create the table when the page is loaded
+        updateLeaderboard();
+
+        // Handle return button click
+        $('#returnButton').on('click', function () {
+        updateLeaderboard();
+            $('#returnButton').hide();
+        });
+        
+        // Handle form submission
+        $('#searchForm').on('submit', function (event) {
+            event.preventDefault();
+            var username = $('#usernameInput').val();
+            if (username !== '') {
+                searchUser(username);
+            }
+        });
+
+        function searchUser(username) {
+        console.log('Searching for user:', username);
+
+        // Show loading message
+        $('#leaderboard').html('<tr><td colspan="2">Loading...</td></tr>');
+
+        // Make the asynchronous POST request to query the API
+        fetch('http://localhost:8086/api/leaderboard/search', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({"name": username}) // Format the payload as user: username
+        })
+            .then(response => response.json())
+            .then(data => {
+            // Clear the current leaderboard on search
+            $('#leaderboard').empty();
+
+            if (data.length > 0) {
+                data.forEach(function (entry) {
+                var user = entry.name;
+                var score = entry.score;
+                $('#leaderboard').append('<tr><td>' + user + '</td><td>' + score + '</td></tr>');
+                });
+            } else {
+                $('#leaderboard').append('<tr><td colspan="2">User not found</td></tr>');
+            }
+
+            console.log('Search completed.');
+            $('#returnButton').show();
+            })
+            .catch(error => {
+            console.log('Error:', error);
+            });
+        }
 
 
-## Housing Assignment
 
-| Family | Attending | Assignment | Count | Children | Arrive | Depart
-| --- | --- | --- | --- | --- | --- | --- |
-| Frank, Judith | Yes | Dogwood Primary | 2 | None | Mon | Sat |
-| | | | | |
-| Johnner, Lora | Yes | ? | 3 | Shay (14) | Mon | Sat |
-| Trent, Yuri | Yes | ? | 5 | Amelia (8), Cruz (6), Gavi (1) | Mon | Sat |
-| Corey | Yes | ? | 1 | - | Mon | Fri |
-| Tiernan | Yes | ? | 1 | - | Mon | Sat |
-| Claire | Yes | ? | 2 | - | Mon | Sat |
-| | | | | |
-|Lisa-Anne, Chris | Yes | ? | 2 | None | Mon | Sat |
-|Brianna, Forest | Yes | ? | 6 | Sayla (6), Tundra (4), Alora (2), Keelynn (1) | Mon | Sat |
-|Kira, Spencer | Yes | ? | 5 | Georgianna (6), James (5), Arabella (2), Hunter (NB) | Mon | Sat |
-|Ethan, Layne | Yes | ? | 6 | William (6), Lily (4), Adeline (2), Eleanor (1) | Mon | Sat |
-| Jarom | Yes | ? | 1 | None | Mon | Sat |
-| Braden | Yes | ? | 1 | None | Mon | Sat |
-| | | | | |
-| Mathew | Yes | ? | 1 | None | Unk | Unk |
-| | | | | |
-| Sherri, Drumond | Yes | ? | 2 | None | Mon | Sat |
-| Taylor | Yes | ? | 1 | None | Unk | Unk |
-| Jake | Yes | ? | 1 | None | Unk | Unk |
-| | | | | |
-| Angela, Tye | Yes | ? | 2 | None | Mon | Sat |
-| Bryce | Yes | ? | 1 | None | Unk | Unk |
-| Aspen, Brandon | Yes | ? | 2 | None | Unk | Unk |
-| Calem | Yes | ? | 1 | None | Unk | Unk |
-| | | | | |
-| Jared, Janice | Yes | ? | 4 | Kelle (15), Naya (13) | Mon | Sat |
-| | | | | |
-| John, Melanie | Yes | ? | 4 | Connor (17), Sophia (14) | Mon | Sat |
-| Isaiah | No | ? | 1 | None | Unk | Unk |
-| | | | | |
-| Jeremiah, Melissa | Yes | ? | 3 | Liam (11) | Mon | Sat |
-| Annalyce | Yes | ? | 1 | None | Unk | Unk |
-| Peyton | Yes | ? | 1 | None | Unk | Unk |
+        // Function to update the leaderboard
+        function updateLeaderboard() {
+            console.log('Updating leaderboard...');
+
+            // Make the asynchronous GET request to retrieve leaderboard data from the API
+            $.getJSON('http://localhost:8086/api/leaderboard/MaxScore')
+            .done(function (data) {
+                // Clear the current leaderboard on update
+                $('#leaderboard').empty();
+
+                // Adds the new scores to the leaderboard from the API response
+                data.forEach(function (entry) {
+                    var user = entry.name;
+                    var score = entry.score;
+                    $('#leaderboard').append('<tr><td>' + user + '</td><td>' + score + '</td></tr>');
+                });
+
+                console.log('Leaderboard updated.');
+            })
+            .fail(function (error) {
+                console.log('Error:', error);
+            });
+        }
+    </script>
+</body>
+
