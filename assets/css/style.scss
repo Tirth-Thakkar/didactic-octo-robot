@@ -14,3 +14,31 @@
     flex: 33.33%;
     padding: 5px;
   }
+
+  button{
+    border-radius: 5em; 
+    align-content: center;
+    align-self: center !important;
+    background-color: pink;
+    border: none;
+    color: black;
+    padding: 0px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    height: 30px;
+    font-family: 'Calibri', sans-serif;
+  }
+
+  table{
+    font-family: 'Calibri', sans-serif !important;
+    border-collapse: collapse !important;
+    width: 100%;
+    border-radius: 0.5em;
+    box-shadow: 0 0 0.5em #175178;
+    padding: 10px 10px;
+    
+  }
+
+

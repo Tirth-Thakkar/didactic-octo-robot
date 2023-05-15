@@ -18,41 +18,50 @@ let cookie = document.getElementById("cookie");
 let score = 0;
 let scoreText = document.getElementById("score");
 let gameOver = false; // Flag variable to track game over state
-clicked = false;
+
 function cookieClick() {
     if (!gameOver) {
-        clicked = true;
         score++;
         scoreText.innerHTML = score;
     }
-    if (clicked){
-setTimeout(function () {
-    cookie.style.display = "none";
-    document.getElementById("Gameover").style.display = "block";
-    gameOver = true;
-
-    fetch("http://localhost:8086/api/leaderboard/score", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            "name": localStorage.getItem("username"),
-            "score": score
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-    })
-    .catch(error => {
-        console.log(error);
-    });
-}, 100); // Timeout duration set to 10 seconds
-};
 }
 
-function tryagain(){
+function tryagain() {
     window.location.href = "{{site.baseurl}}/game";
 }
+
+function gameover() {
+    if (!gameOver) {
+        cookie.style.display = "none";
+        document.getElementById("Gameover").style.display = "block";
+        gameOver = true;
+
+        fetch("http://localhost:8086/api/leaderboard/score", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "name": localStorage.getItem("username"),
+                "score": score
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    }
+}
+
+// Timer functionality
+let timer = setTimeout(gameover, 30000); // Set the timer to 30 seconds
+
+function resetTimer() {
+    clearTimeout(timer); // Clear the timer
+    timer = setTimeout(gameover, 30000); // Reset the timer to 30 seconds
+}
+
 </script>
