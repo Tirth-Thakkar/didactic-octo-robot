@@ -15,22 +15,43 @@
     padding: 5px;
   }
 
-  button{
-    border-radius: 5em; 
-    align-content: center;
-    align-self: center !important;
-    background-color: pink;
-    border: none;
-    color: black;
-    padding: 0px 10px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
+  body {
+    --bg-color: #333333 !important;
+    --bg-color-light: #1A1A1A; 
+    background: linear-gradient(-45deg, var(--bg-color), var(--bg-color-light), var(--bg-color), var(--bg-color-light));
+    background-size: 1200% 1200% !important;
+    animation: gradient 15s ease infinite !important;
+    height: 100vh !important;
+    font-family: 'Roboto', sans-serif;
     font-size: 16px;
-    height: 30px;
-    font-family: 'Calibri', sans-serif;
   }
-
+  
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }  
+  
+  button{
+  align-self: center;
+  font-family: 'Calibri', sans-serif !important;
+  width: 100%;
+  color: white;
+  cursor: pointer;
+  border-radius: 0.75em;
+  box-shadow: 0 0 0.5em #175178;
+  min-width: fit-content;
+  background-color: rgb(223, 109, 109);
+  max-height: 30px !important;
+  padding: 5, 10px;
+  margin: 0px !important;
+  }
   table{
     font-family: 'Calibri', sans-serif !important;
     border-collapse: collapse !important;
@@ -40,5 +61,23 @@
     padding: 10px 10px;
     
   }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: left !important;
+}
+
+input[type=text], input[type=password] {
+  font-family: 'Fira Mono', monospace;
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  box-shadow: 0 0 0.5em #000;
+  border-radius: 0.5em;
+}
 
 

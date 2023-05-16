@@ -2,18 +2,69 @@
 <head>
     <title>Leaderboard</title>
 </head>
+<style>
+    #search {
+      color: #20323f;
+      background-color: #e5b76d;
+      width: 100px;
+      height: 30px;
+      display: inline-block;
+      justify-content: center;
+      justify-self: right !important;
+      padding: 0px;
+      margin: 0px;
+      font-size: 10pt;
+      border-width: 2px;
+      box-shadow: 0 0 1em #175178;
+      position: relative;
+      left: 305px;
+      bottom: 40px;
+    }
+
+    #returnButton{
+      background-color: #368ac2;
+      color: white;
+      border-color: white;
+      height: 32px;
+      width: 32px;
+      border-radius: 50%;
+      display: inline-block;
+      justify-content: center;
+      justify-self: right !important;
+      padding: 0px;
+      margin: 0px;
+      font-size: 10pt;
+      border-width: 2px;
+      box-shadow: 0 0 1em #175178;
+      position: relative;
+      left: 380px;
+      bottom: 70px;
+    }
+
+    #searchForm {
+    max-width: 75%;
+    max-height: fit-content;  
+    }
+
+    #usernameInput {
+    max-height: 35;
+    font-size: 15;
+    }
+</style>
+
 <body>
     <div>
         <form id="searchForm">
             <input type="text" id="usernameInput" placeholder="Enter username">
-            <button type="submit">Search</button>
-            <button type="button" id="returnButton" style="display: none;">Return</button>
+            <button type="submit" id = "search">Search                                        <i class="fa-solid fa-magnifying-glass"></i></button>
+            <button type="button" id="returnButton" style="display: none;"><i class="fa-solid fa-right-from-bracket"></i></button>
         </form>
     </div>
 
     <div>
         <table id="leaderboard">
-            <tr>
+        <h2>Leaderboard</h2>
+            <br><tr>
                 <th>User</th>
                 <th>Score</th>
             </tr>

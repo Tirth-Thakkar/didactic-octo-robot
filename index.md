@@ -11,6 +11,11 @@
   // After Button Click Saving Username to local storage
   login_button.onclick = function(){
     var username = document.getElementById("login_username").value;
+    if (username == ""){
+      alert("Please enter a username")
+      return
+    }
+    else {
     localStorage.setItem("username", username);
     localStorage.setItem("logged_in", true);
     let logged_in_user = localStorage.getItem("username");
@@ -18,5 +23,6 @@
     console.log(logged_in_user);
     console.log(login_status)
     window.location.href = "{{site.baseurl}}/game"
+    };
   };  
 </script>

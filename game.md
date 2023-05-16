@@ -2,9 +2,30 @@
     #Gameover {
         display: none;
     }
+
+    #restart {
+        max-width: 200px;
+        position: relative;
+        left: 150px;
+        bottom: 70px;
+    }
+
+    #score {
+        position: relative;
+        left: 100px;
+        bottom: 35px;
+        font-size: 30px;
+    }
+
+    #display {
+        position: relative;
+        top: 8px;
+        font-size: 30px;
+    }
 </style>
 
 <div id="game">
+    <h3 id = "display">Score:</h3>
     <div id="score">
         <h1>0</h1>
     </div>
