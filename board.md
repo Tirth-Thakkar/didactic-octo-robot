@@ -73,7 +73,7 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        // Update the leaderboard every 5 seconds
+        // Update the leaderboard every 15 seconds
         setInterval(updateLeaderboard, 15000);
 
         // Retrieve the leaderboard data and create the table when the page is loaded
