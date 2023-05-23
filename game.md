@@ -22,6 +22,12 @@
         top: 8px;
         font-size: 30px;
     }
+
+    /* New styles for the cookie image */
+    #cookie {
+        transition: all 0.5s ease-in-out;
+        cursor: pointer;
+    }
 </style>
 
 <div id="game">
@@ -44,6 +50,15 @@ function cookieClick() {
     if (!gameOver) {
         score++;
         scoreText.innerHTML = score;
+
+        // Change the cookie image style and color randomly
+        let randomSize = Math.floor(Math.random() * 50) + 50; // Random size between 50 and 100 pixels
+        let randomRotation = Math.floor(Math.random() * 360); // Random rotation between 0 and 360 degrees
+        let randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16); // Random color in hexadecimal format
+        cookie.style.transform = `rotate(${randomRotation}deg) scale(${randomSize/100})`;
+        cookie.style.filter = `hue-rotate(${randomRotation}deg)`;
+        cookie.style.backgroundColor = "transparent";
+        cookie.style.borderColor = randomColor;
     }
 }
 
